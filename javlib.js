@@ -22,6 +22,9 @@ let video_id_prefix_dict = {
     'stars': '1',
     'sdnm': '1',
     'fsdss': '1',
+    'fcdss': '1',
+    'fadss': '1',
+    'fsdss': '1',
     'msfh': '1',
     'gvh': '13',
 }
@@ -43,42 +46,40 @@ else
 let video_id_suffix = video_id.slice(-3)
 
 let dmm_id = video_id_prefix + video_id_suffix
-//alert(video_id);
 
 function addLink(version)
 {
     let url = `http://cc3001.dmm.co.jp/litevideo/freepv/${dmm_id[0]}/${dmm_id.substring(0,3)}/${dmm_id}/${dmm_id}_${version}_w.mp4`
-    var cell = video_id_row.insertCell()
     let link_tag = document.createElement('a')
     link_tag.href = url
     link_tag.innerHTML = version
-    cell.appendChild(link_tag)
+    video_id_row.insertCell().appendChild(link_tag)
     return url
 }
 
-let urls = []
-for (version of ['dmb', 'dm', 'sm'])
+right_column_div = document.getElementById('rightcolumn')
+for (version of ['mhb', 'dmb', 'dm', 'sm'])
 {
-    urls.push(addLink(version))
-}
+    url = addLink(version)
 
-for (url of urls)
-{
     let http = new XMLHttpRequest()
     http.open('HEAD', url, false)
     http.send();
     if (http.status != 404)
     {
+        let preview_row = document.getElementById('video_jacket_info').insertRow()
+
         let video_tag = document.createElement('video')
         video_tag.src = url
         video_tag.controls = true
+        preview_row.insertCell().appendChild(video_tag)
 
         let preview_thumbs = document.getElementsByClassName('previewthumbs')[0]
-        right_column_div.removeChild(preview_thumbs)
-
-        let preview_row = document.getElementById('video_jacket_info').insertRow()
-        preview_row.insertCell().appendChild(video_tag)
-        preview_row.insertCell().appendChild(preview_thumbs)
+        if (preview_thumbs)
+        {
+            right_column_div.removeChild(preview_thumbs)
+            preview_row.insertCell().appendChild(preview_thumbs)
+        }
 
         break;
     }
