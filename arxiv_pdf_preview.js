@@ -21,8 +21,12 @@
             pdfViewer.width = '100%'
             pdfViewer.height = '1000px'
 
+            let pdfDiv = document.createElement('div')
+            pdfDiv.appendChild(pdfViewer)
+            pdfDiv.style = 'position: relative'
+
             let insertPoint = document.getElementById('abs-outer')
-            insertPoint.appendChild(pdfViewer)
+            insertPoint.appendChild(pdfDiv)
             break
         }
     }
