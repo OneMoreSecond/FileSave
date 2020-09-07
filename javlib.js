@@ -21,6 +21,7 @@ let video_id_prefix_dict = {
     'chn': '118',
     'sga': '118',
     'tre': '118',
+    'onez': '118',
     'star': '1',
     'stars': '1',
     'sdnm': '1',
