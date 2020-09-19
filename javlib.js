@@ -34,6 +34,10 @@ let video_id_prefix_dict = {
     'gvh': '13',
 }
 
+no_zero_set = {
+    'sqte': 0
+}
+
 let video_id_div = document.getElementById('video_id')
 let video_id_row = video_id_div.getElementsByTagName('tr')[0]
 let video_id = video_id_row.cells[1].textContent
@@ -43,7 +47,7 @@ if(video_id_prefix in video_id_prefix_dict)
 {
     video_id_prefix = video_id_prefix_dict[video_id_prefix] + video_id_prefix
 }
-else
+else if(!(video_id_prefix in no_zero_set))
 {
     video_id_prefix += '00'
 }
