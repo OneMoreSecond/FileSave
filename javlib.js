@@ -10,6 +10,7 @@ let video_id_prefix_dict = {
     'aby': '118',
     'abp': '118',
     'abs': '118',
+    'aka': '118',
     'dic': '118',
     'ppt': '118',
     'tem': '118',
@@ -18,6 +19,10 @@ let video_id_prefix_dict = {
     'dtt': '118',
     'kbi': '118',
     'chn': '118',
+    'sga': '118',
+    'tre': '118',
+    'onez': '118',
+    'mkmp': '84',
     'star': '1',
     'stars': '1',
     'sdnm': '1',
@@ -29,6 +34,10 @@ let video_id_prefix_dict = {
     'gvh': '13',
 }
 
+no_zero_set = {
+    'sqte': 0
+}
+
 let video_id_div = document.getElementById('video_id')
 let video_id_row = video_id_div.getElementsByTagName('tr')[0]
 let video_id = video_id_row.cells[1].textContent
@@ -38,7 +47,7 @@ if(video_id_prefix in video_id_prefix_dict)
 {
     video_id_prefix = video_id_prefix_dict[video_id_prefix] + video_id_prefix
 }
-else
+else if(!(video_id_prefix in no_zero_set))
 {
     video_id_prefix += '00'
 }
