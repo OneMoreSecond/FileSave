@@ -14,7 +14,7 @@
 
     for (let ele of document.getElementsByClassName('abs-button'))
     {
-        if (ele.innerHTML == 'PDF')
+        if (ele.innerHTML == 'PDF' || ele.innerHTML == 'PDF only')
         {
             let pdfViewer = document.createElement('iframe')
             pdfViewer.src = ele.getAttribute('href')
