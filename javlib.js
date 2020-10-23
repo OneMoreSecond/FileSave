@@ -30,6 +30,7 @@ let video_id_prefix_dict = {
     'fcdss': '1',
     'fadss': '1',
     'fsdss': '1',
+    'kmhrs': '1',
     'msfh': '1',
     'sdmf': '1',
     'kire': '1',
