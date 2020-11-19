@@ -27,6 +27,7 @@ let video_id_prefix_dict = {
     'star': '1',
     'stars': '1',
     'sdnm': '1',
+    'sdab': '1',
     'fsdss': '1',
     'fcdss': '1',
     'fadss': '1',
