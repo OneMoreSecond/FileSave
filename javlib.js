@@ -72,14 +72,14 @@ function addLink(version)
 }
 
 right_column_div = document.getElementById('rightcolumn')
-for (version of ['mhb', 'dmb', 'dm', 'sm'])
+for (version of ['mhb', 'dmb', 'dm', 'sm', 'bad'])
 {
     url = addLink(version)
 
     let http = new XMLHttpRequest()
     http.open('HEAD', url, false)
     http.send();
-    if (http.status != 404)
+    if (http.status < 400)
     {
         let preview_row = document.getElementById('video_jacket_info').insertRow()
 
