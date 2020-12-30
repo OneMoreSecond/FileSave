@@ -10,6 +10,7 @@ let video_id_prefix_dict = {
     'aby': '118',
     'abp': '118',
     'abs': '118',
+    'abw': '118',
     'aka': '118',
     'dic': '118',
     'ppt': '118',
