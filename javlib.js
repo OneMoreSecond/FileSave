@@ -19,6 +19,7 @@ let video_id_prefix_dict = {
     'mgt': '118',
     'dtt': '118',
     'kbi': '118',
+    'wps': '118',
     'chn': '118',
     'sga': '118',
     'tre': '118',
