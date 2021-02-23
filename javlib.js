@@ -42,7 +42,8 @@ let video_id_prefix_dict = {
 }
 
 no_zero_set = {
-    'sqte': 0
+    'sqte': 0,
+  	'pfes': 0,
 }
 
 let video_id_div = document.getElementById('video_id')
