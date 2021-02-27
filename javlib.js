@@ -138,6 +138,7 @@ for (version of ['mhb', 'dmb', 'dm', 'sm'])
         }
 
         is_video_inserted = true
+        addLink('√')
 
         if (DEBUG)
         {
@@ -148,5 +149,5 @@ for (version of ['mhb', 'dmb', 'dm', 'sm'])
 
 if (!is_video_inserted)
 {
-    addLink('bad')
+    addLink('×')
 }
