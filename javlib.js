@@ -14,6 +14,7 @@ let video_id_prefix_dict = {
     'aka': '118',
     'dic': '118',
     'ppt': '118',
+    'pxh': '118',
     'tem': '118',
     'bgn': '118',
     'mgt': '118',
