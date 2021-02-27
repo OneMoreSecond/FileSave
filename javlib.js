@@ -6,7 +6,19 @@
 // @grant       none
 // ==/UserScript==allow pasting
 
+let DEBUG = false
+
+if (DEBUG)
+{
+    alert('Starting debugging!')
+}
+
+let video_maker_dict = {
+    'プレステージ': '118',
+}
+
 let video_id_prefix_dict = {
+    /*
     'aby': '118',
     'abp': '118',
     'abs': '118',
@@ -26,6 +38,7 @@ let video_id_prefix_dict = {
     'tre': '118',
     'onez': '118',
     'kpb': '118',
+    */
     'mkmp': '84',
     'star': '1',
     'stars': '1',
@@ -40,6 +53,7 @@ let video_id_prefix_dict = {
     'sdmf': '1',
     'kire': '1',
     'gvh': '13',
+    'nitr': '49',
 }
 
 no_zero_set = {
@@ -47,16 +61,34 @@ no_zero_set = {
   	'pfes': 0,
 }
 
+let video_maker_div = document.getElementById('video_maker')
+let video_maker_row = video_maker_div.getElementsByTagName('tr')[0]
+let video_maker = video_maker_row.cells[1].getElementsByTagName('a')[0].textContent
+
+if (DEBUG)
+{
+    alert('video_maker: ' + video_maker)
+}
+
 let video_id_div = document.getElementById('video_id')
 let video_id_row = video_id_div.getElementsByTagName('tr')[0]
 let video_id = video_id_row.cells[1].textContent
 
+if (DEBUG)
+{
+    alert('video_id: ' + video_id)
+}
+
 var video_id_prefix = video_id.slice(0, -4).toLowerCase()
-if(video_id_prefix in video_id_prefix_dict)
+if (video_maker in video_maker_dict)
+{
+    video_id_prefix = video_maker_dict[video_maker] + video_id_prefix
+}
+if (video_id_prefix in video_id_prefix_dict)
 {
     video_id_prefix = video_id_prefix_dict[video_id_prefix] + video_id_prefix
 }
-else if(!(video_id_prefix in no_zero_set))
+else if (!(video_id_prefix in no_zero_set))
 {
     video_id_prefix += '00'
 }
@@ -76,9 +108,15 @@ function addLink(version)
 }
 
 right_column_div = document.getElementById('rightcolumn')
-for (version of ['mhb', 'dmb', 'dm', 'sm', 'bad'])
+is_video_inserted = false
+for (version of ['mhb', 'dmb', 'dm', 'sm'])
 {
     url = addLink(version)
+
+    if (is_video_inserted)
+    {
+        continue;
+    }
 
     let http = new XMLHttpRequest()
     http.open('HEAD', url, false)
@@ -99,6 +137,16 @@ for (version of ['mhb', 'dmb', 'dm', 'sm', 'bad'])
             preview_row.insertCell().appendChild(preview_thumbs)
         }
 
-        break;
+        is_video_inserted = true
+
+        if (DEBUG)
+        {
+            alert('successful version: ' + version)
+        }
     }
+}
+
+if (!is_video_inserted)
+{
+    addLink('bad')
 }
