@@ -23,7 +23,6 @@ let video_maker_dict = {
 }
 
 let video_id_prefix_dict = {
-    /*
     'aby': '118',
     'abp': '118',
     'abs': '118',
@@ -43,7 +42,6 @@ let video_id_prefix_dict = {
     'tre': '118',
     'onez': '118',
     'kpb': '118',
-    */
     'mkmp': '84',
     'star': '1',
     'stars': '1',
@@ -73,7 +71,7 @@ function get_info(info_name, has_link)
     let info_div = document.getElementById(info_name)
     let info_row = info_div.getElementsByTagName('tr')[0]
     let info_cell = info_row.cells[1]
-    let info_text = (has_link ? info_cell.getElementsByTagName('a')[0] : info_cell).textContent
+    let info_text = (has_link ? info_cell.getElementsByTagName('a')[0] : info_cell).textContent.trim()
     alertd(info_name + ': ' + info_text)
     return [info_row, info_text]
 }
