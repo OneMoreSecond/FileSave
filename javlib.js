@@ -8,10 +8,15 @@
 
 let DEBUG = false
 
-if (DEBUG)
+function alertd(message)
 {
-    alert('Starting debugging!')
+    if (DEBUG)
+    {
+        alert(message)
+    }
 }
+
+alertd('Starting debugging 1!')
 
 let video_maker_dict = {
     'プレステージ': '118',
@@ -61,30 +66,30 @@ no_zero_set = {
   	'pfes': 0,
 }
 
-let video_maker_div = document.getElementById('video_maker')
-let video_maker_row = video_maker_div.getElementsByTagName('tr')[0]
-let video_maker = video_maker_row.cells[1].getElementsByTagName('a')[0].textContent
+alertd('Starting debugging 2!')
 
-if (DEBUG)
+function get_info(info_name, has_link)
 {
-    alert('video_maker: ' + video_maker)
+    let info_div = document.getElementById(info_name)
+    let info_row = info_div.getElementsByTagName('tr')[0]
+    let info_cell = info_row.cells[1]
+    let info_text = (has_link ? info_cell.getElementsByTagName('a')[0] : info_cell).textContent
+    alertd(info_name + ': ' + info_text)
+    return [info_row, info_text]
 }
 
-let video_id_div = document.getElementById('video_id')
-let video_id_row = video_id_div.getElementsByTagName('tr')[0]
-let video_id = video_id_row.cells[1].textContent
+alertd('Starting getting info!')
 
-if (DEBUG)
-{
-    alert('video_id: ' + video_id)
-}
+let [video_maker_row, video_maker] = get_info('video_maker')
+let [video_label_row, video_label] = get_info('video_label')
+let [video_id_row, video_id] = get_info('video_id')
 
 var video_id_prefix = video_id.slice(0, -4).toLowerCase()
 if (video_maker in video_maker_dict)
 {
     video_id_prefix = video_maker_dict[video_maker] + video_id_prefix
 }
-if (video_id_prefix in video_id_prefix_dict)
+else if (video_id_prefix in video_id_prefix_dict)
 {
     video_id_prefix = video_id_prefix_dict[video_id_prefix] + video_id_prefix
 }
@@ -106,6 +111,8 @@ function addLink(version)
     video_id_row.insertCell().appendChild(link_tag)
     return url
 }
+
+alertd('Starting adding links!')
 
 right_column_div = document.getElementById('rightcolumn')
 is_video_inserted = false
@@ -140,10 +147,7 @@ for (version of ['mhb', 'dmb', 'dm', 'sm'])
         is_video_inserted = true
         addLink('√')
 
-        if (DEBUG)
-        {
-            alert('successful version: ' + version)
-        }
+        alertd('successful version: ' + version)
     }
 }
 
