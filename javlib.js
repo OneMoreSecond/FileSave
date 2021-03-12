@@ -62,7 +62,8 @@ let video_id_prefix_dict = {
 
 no_zero_set = {
     'sqte': 0,
-  	'pfes': 0,
+    'pfes': 0,
+    'mrss': 0,
 }
 
 alertd('Starting debugging 2!')
