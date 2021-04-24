@@ -50,7 +50,7 @@ let video_id_prefix_dict = {
     'fsdss': '1',
     'fcdss': '1',
     'fadss': '1',
-    'fsdss': '1',
+    'dldss': '1',
     'kmhrs': '1',
     'msfh': '1',
     'sdmf': '1',
@@ -58,12 +58,15 @@ let video_id_prefix_dict = {
     'gvh': '13',
     'nitr': '49',
     'honb': 'h_1133',
+    'wfr': '2',
+    'mxgs': 'h_068',
 }
 
 no_zero_set = {
     'sqte': 0,
     'pfes': 0,
     'mrss': 0,
+    'usba': 0,
 }
 
 alertd('Starting debugging 2!')
@@ -84,7 +87,7 @@ let [video_maker_row, video_maker] = get_info('video_maker')
 let [video_label_row, video_label] = get_info('video_label')
 let [video_id_row, video_id] = get_info('video_id')
 
-var video_id_prefix = video_id.slice(0, -4).toLowerCase()
+var video_id_prefix = video_id.split('-')[0].toLowerCase()
 if (video_maker in video_maker_dict)
 {
     video_id_prefix = video_maker_dict[video_maker] + video_id_prefix
@@ -98,7 +101,7 @@ else if (!(video_id_prefix in no_zero_set))
     video_id_prefix += '00'
 }
 
-let video_id_suffix = video_id.slice(-3)
+let video_id_suffix = video_id.split('-')[1]
 
 let dmm_id = video_id_prefix + video_id_suffix
 
