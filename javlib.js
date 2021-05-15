@@ -60,6 +60,7 @@ let video_id_prefix_dict = {
     'honb': 'h_1133',
     'wfr': '2',
     'mxgs': 'h_068',
+    'zex': 'h_720',
 }
 
 no_zero_set = {
@@ -67,6 +68,8 @@ no_zero_set = {
     'pfes': 0,
     'mrss': 0,
     'usba': 0,
+    'fcdc': 0,
+    'venx': 0,
 }
 
 alertd('Starting debugging 2!')
