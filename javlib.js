@@ -61,6 +61,11 @@ let video_id_prefix_dict = {
     'wfr': '2',
     'mxgs': 'h_068',
     'zex': 'h_720',
+    'jrze': 'h_086',
+}
+
+has_zero_set = {
+    'jrze': 0,
 }
 
 no_zero_set = {
@@ -97,7 +102,14 @@ if (video_maker in video_maker_dict)
 }
 else if (video_id_prefix in video_id_prefix_dict)
 {
+    need_zero = video_id_prefix in has_zero_set
+
     video_id_prefix = video_id_prefix_dict[video_id_prefix] + video_id_prefix
+
+    if (need_zero)
+    {
+        video_id_prefix += '00'
+    }
 }
 else if (!(video_id_prefix in no_zero_set))
 {
