@@ -62,6 +62,7 @@ let video_id_prefix_dict = {
     'mxgs': 'h_068',
     'zex': 'h_720',
     'jrze': 'h_086',
+    'dfdm': '2',
 }
 
 has_zero_set = {
