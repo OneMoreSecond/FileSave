@@ -68,12 +68,16 @@ let video_id_prefix_dict = {
     'umd': '125',
     'hone': 'h_086',
     'clot': 'h_237',
+    'sdjs': '1',
+    'wfr': '2',
+    'wkd': '2',
 }
 
 has_zero_set = {
     'jrze': 0,
     'dfe': 0,
     'hone': 0,
+    'wfr': 0,
 }
 
 no_zero_set = {
@@ -82,7 +86,7 @@ no_zero_set = {
     'mrss': 0,
     'usba': 0,
     'fcdc': 0,
-    'venx': 0,
+    //'venx': 0,
     'avsa': 0,
     'dvaj': 0,
     'nitr': 0,
