@@ -71,6 +71,7 @@ let video_id_prefix_dict = {
     'sdjs': '1',
     'wfr': '2',
     'wkd': '2',
+    'knmb': 'h_491',
 }
 
 has_zero_set = {
@@ -92,7 +93,9 @@ no_zero_set = {
     'nitr': 0,
     'veo': 0,
     'flav': 0,
-    'cemd': 0,
+    //'cemd': 0,
+    'vec': 0,
+    'cead': 0,
 }
 
 alertd('Starting debugging 2!')
