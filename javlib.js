@@ -72,6 +72,8 @@ let video_id_prefix_dict = {
     'wfr': '2',
     'wkd': '2',
     'knmb': 'h_491',
+    'hzgd': 'h_1100',
+    'macb': 'h_687',
 }
 
 has_zero_set = {
@@ -79,6 +81,7 @@ has_zero_set = {
     'dfe': 0,
     'hone': 0,
     'wfr': 0,
+    'hzgd': 0,
 }
 
 no_zero_set = {
@@ -96,6 +99,7 @@ no_zero_set = {
     //'cemd': 0,
     'vec': 0,
     'cead': 0,
+    'ekdv': 0,
 }
 
 alertd('Starting debugging 2!')
@@ -144,6 +148,10 @@ let dmm_id = video_id_prefix + video_id_suffix
 function addLink(version)
 {
     let url = `http://cc3001.dmm.co.jp/litevideo/freepv/${dmm_id[0]}/${dmm_id.substring(0,3)}/${dmm_id}/${dmm_id}_${version}_w.mp4`
+    if (video_maker == 'プレステージ')
+    {
+        url = `https://www.prestige-av.com/sample_movie/TKT${video_id.toUpperCase()}.mp4`
+    }
     let link_tag = document.createElement('a')
     link_tag.href = url
     link_tag.innerHTML = version
