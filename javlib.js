@@ -42,7 +42,7 @@ let video_id_prefix_dict = {
     'tre': '118',
     'onez': '118',
     'kpb': '118',
-    'mkmp': '84',
+    //'mkmp': '84',
     'star': '1',
     'stars': '1',
     'sdnm': '1',
@@ -96,10 +96,17 @@ no_zero_set = {
     'nitr': 0,
     'veo': 0,
     'flav': 0,
-    //'cemd': 0,
+    'cemd': 0,
     'vec': 0,
     'cead': 0,
     'ekdv': 0,
+    //'hzgd': 'h_1100',
+    'bijn': 0,
+    'real': 0,
+    'mkmp': 0,
+    'mdtm': 0,
+    'lulu': 0,
+    'homa': 0,
 }
 
 alertd('Starting debugging 2!')
