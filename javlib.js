@@ -107,6 +107,7 @@ no_zero_set = {
     'mdtm': 0,
     'lulu': 0,
     'homa': 0,
+    'bab': 0,
 }
 
 alertd('Starting debugging 2!')
