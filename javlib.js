@@ -171,6 +171,11 @@ alertd('Making Prestige links');
     {
         links.push({
             name: "prestige",
+            url: `https://www.prestige-av.com/sample_movie/${videoId.toUpperCase()}.mp4`,
+            rank: RANK.top
+        });
+        links.push({
+            name: "prestigeTKT",
             url: `https://www.prestige-av.com/sample_movie/TKT${videoId.toUpperCase()}.mp4`,
             rank: RANK.top
         });
