@@ -6,207 +6,256 @@
 // @grant       none
 // ==/UserScript==allow pasting
 
-let DEBUG = false
+let DEBUG = false;
 
 function alertd(message)
 {
     if (DEBUG)
     {
-        alert(message)
+        alert(message);
     }
 }
 
-alertd('Starting debugging 1!')
+alertd('Starting debugging!');
 
-let video_maker_dict = {
-    'プレステージ': '118',
-}
-
-let video_id_prefix_dict = {
-    'aby': '118',
-    'abp': '118',
-    'abs': '118',
-    'abw': '118',
-    'aka': '118',
-    'dic': '118',
-    'ppt': '118',
-    'pxh': '118',
-    'tem': '118',
-    'bgn': '118',
-    'mgt': '118',
-    'dtt': '118',
-    'kbi': '118',
-    'wps': '118',
-    'chn': '118',
-    'sga': '118',
-    'tre': '118',
-    'onez': '118',
-    'kpb': '118',
-    //'mkmp': '84',
-    'star': '1',
-    'stars': '1',
-    'sdnm': '1',
-    'sdab': '1',
-    'fsdss': '1',
-    'fcdss': '1',
-    'fadss': '1',
-    'dldss': '1',
-    'kmhrs': '1',
-    'msfh': '1',
-    'sdmf': '1',
-    'kire': '1',
-    'gvh': '13',
-    'nitr': '49',
-    'honb': 'h_1133',
-    'wfr': '2',
-    'mxgs': 'h_068',
-    'zex': 'h_720',
-    'jrze': 'h_086',
-    'dfdm': '2',
-    'dfe': '2',
-    'sdde': '1',
-    'umd': '125',
-    'hone': 'h_086',
-    'clot': 'h_237',
-    'sdjs': '1',
-    'wfr': '2',
-    'wkd': '2',
-    'knmb': 'h_491',
-    'hzgd': 'h_1100',
-    'macb': 'h_687',
-}
-
-has_zero_set = {
-    'jrze': 0,
-    'dfe': 0,
-    'hone': 0,
-    'wfr': 0,
-    'hzgd': 0,
-}
-
-no_zero_set = {
-    'sqte': 0,
-    'pfes': 0,
-    'mrss': 0,
-    'usba': 0,
-    'fcdc': 0,
-    //'venx': 0,
-    'avsa': 0,
-    'dvaj': 0,
-    'nitr': 0,
-    'veo': 0,
-    'flav': 0,
-    'cemd': 0,
-    'vec': 0,
-    'cead': 0,
-    'ekdv': 0,
-    //'hzgd': 'h_1100',
-    'bijn': 0,
-    'real': 0,
-    'mkmp': 0,
-    'mdtm': 0,
-    'lulu': 0,
-    'homa': 0,
-    'bab': 0,
-}
-
-alertd('Starting debugging 2!')
-
-function get_info(info_name, has_link)
+function getVideoInfo(infoName)
 {
-    let info_div = document.getElementById(info_name)
-    let info_row = info_div.getElementsByTagName('tr')[0]
-    let info_cell = info_row.cells[1]
-    let info_text = (has_link ? info_cell.getElementsByTagName('a')[0] : info_cell).textContent.trim()
-    alertd(info_name + ': ' + info_text)
-    return [info_row, info_text]
+    let infoDiv = document.getElementById(infoName);
+    let infoRow = infoDiv.getElementsByTagName('tr')[0];
+    let infoCell = infoRow.cells[1];
+    const hasLink = false;
+    let infoText = (hasLink ? infoCell.getElementsByTagName('a')[0] : infoCell).textContent.trim();
+    alertd(infoName + ': ' + infoText);
+    return {
+        row: infoRow,
+        text: infoText,
+    };
 }
 
-alertd('Starting getting info!')
+alertd('Getting info!');
 
-let [video_maker_row, video_maker] = get_info('video_maker')
-let [video_label_row, video_label] = get_info('video_label')
-let [video_id_row, video_id] = get_info('video_id')
+let { row: videoMakerRow, text: videoMaker } = getVideoInfo('video_maker');
+let { row: videoLabelRow, text: videoLabel } = getVideoInfo('video_label');
+let { row: videoIdRow, text: videoId } = getVideoInfo('video_id');
 
-var video_id_prefix = video_id.split('-')[0].toLowerCase()
-if (video_maker in video_maker_dict)
+alertd('Making links');
+
+let links = [];
+
+const RANK = {
+    top: -1000,
+    mhb: -400,
+    dmb: -300,
+    dm: -200,
+    sm: -100,
+    normal: 0,
+    bottom: 1000,
+};
+
+let [videoIdPrefix, videoIdSuffix] = videoId.split('-');
+
+alertd('Making DMM links');
 {
-    video_id_prefix = video_maker_dict[video_maker] + video_id_prefix
-}
-else if (video_id_prefix in video_id_prefix_dict)
-{
-    need_zero = video_id_prefix in has_zero_set
+    let videoMakerPrefixMap = new Map([
+        ['プレステージ', '118']
+    ]);
 
-    video_id_prefix = video_id_prefix_dict[video_id_prefix] + video_id_prefix
+    let videoIdPrefixMap = new Map([
+        ['aby', '118'],
+        ['abp', '118'],
+        ['abs', '118'],
+        ['abw', '118'],
+        ['aka', '118'],
+        ['dic', '118'],
+        ['ppt', '118'],
+        ['pxh', '118'],
+        ['tem', '118'],
+        ['bgn', '118'],
+        ['mgt', '118'],
+        ['dtt', '118'],
+        ['kbi', '118'],
+        ['wps', '118'],
+        ['chn', '118'],
+        ['sga', '118'],
+        ['tre', '118'],
+        ['onez', '118'],
+        ['kpb', '118'],
+        ['mkmp', '84'],
+        ['star', '1'],
+        ['stars', '1'],
+        ['sdnm', '1'],
+        ['sdab', '1'],
+        ['fsdss', '1'],
+        ['fcdss', '1'],
+        ['fadss', '1'],
+        ['dldss', '1'],
+        ['kmhrs', '1'],
+        ['msfh', '1'],
+        ['sdmf', '1'],
+        ['kire', '1'],
+        ['gvh', '13'],
+        ['nitr', '49'],
+        ['honb', 'h_1133'],
+        ['wfr', '2'],
+        ['mxgs', 'h_068'],
+        ['zex', 'h_720'],
+        ['jrze', 'h_086'],
+        ['dfdm', '2'],
+        ['dfe', '2'],
+        ['sdde', '1'],
+        ['umd', '125'],
+        ['hone', 'h_086'],
+        ['clot', 'h_237'],
+        ['sdjs', '1'],
+        ['wfr', '2'],
+        ['wkd', '2'],
+        ['knmb', 'h_491'],
+        ['hzgd', 'h_1100'],
+        ['macb', 'h_687']
+    ]);
+    alertd('DMM config done');
 
-    if (need_zero)
+    let lowerIdPrefix = videoIdPrefix.toLowerCase();
+    let prefixes = new Set(['']);
+    if (videoMakerPrefixMap.has(videoMaker))
     {
-        video_id_prefix += '00'
+        prefixes.add(videoMakerPrefixMap.get(videoMaker));
     }
-}
-else if (!(video_id_prefix in no_zero_set))
-{
-    video_id_prefix += '00'
-}
-
-let video_id_suffix = video_id.split('-')[1]
-
-let dmm_id = video_id_prefix + video_id_suffix
-
-function addLink(version)
-{
-    let url = `http://cc3001.dmm.co.jp/litevideo/freepv/${dmm_id[0]}/${dmm_id.substring(0,3)}/${dmm_id}/${dmm_id}_${version}_w.mp4`
-    if (video_maker == 'プレステージ')
+    if (videoIdPrefixMap.has(lowerIdPrefix))
     {
-        url = `https://www.prestige-av.com/sample_movie/TKT${video_id.toUpperCase()}.mp4`
+        prefixes.add(videoIdPrefixMap.get(lowerIdPrefix));
     }
-    let link_tag = document.createElement('a')
-    link_tag.href = url
-    link_tag.innerHTML = version
-    video_id_row.insertCell().appendChild(link_tag)
-    return url
-}
+    alertd('DMM prefix done');
 
-alertd('Starting adding links!')
-
-right_column_div = document.getElementById('rightcolumn')
-is_video_inserted = false
-for (version of ['mhb', 'dmb', 'dm', 'sm'])
-{
-    url = addLink(version)
-
-    if (is_video_inserted)
+    let dmmIds = [];
+    for (let prefix of prefixes)
     {
-        continue;
+        dmmIds.push({
+            id: prefix + lowerIdPrefix + videoIdSuffix,
+            versionSuffix: prefix,
+            rankBias: prefix !== '' ? -2 : 2
+        });
+        dmmIds.push({
+            id: prefix + lowerIdPrefix + '00' + videoIdSuffix,
+            versionSuffix: prefix + '0',
+            rankBias: prefix !== '' ? -1 : 1
+        });
     }
+    alertd('DMM ID done');
 
-    let http = new XMLHttpRequest()
-    http.open('HEAD', url, false)
-    http.send();
-    if (http.status < 400)
+    for (let version of ['mhb', 'dmb', 'dm', 'sm'])
     {
-        let preview_row = document.getElementById('video_jacket_info').insertRow()
-
-        let video_tag = document.createElement('video')
-        video_tag.src = url
-        video_tag.controls = true
-        preview_row.insertCell().appendChild(video_tag)
-
-        let preview_thumbs = document.getElementsByClassName('previewthumbs')[0]
-        if (preview_thumbs)
+        for (let dmmId of dmmIds)
         {
-            right_column_div.removeChild(preview_thumbs)
-            preview_row.insertCell().appendChild(preview_thumbs)
+            let sid = dmmId.id;
+            let rank = RANK[version] + dmmId.rankBias;
+            links.push({
+                name: version + dmmId.versionSuffix,
+                url: `http://cc3001.dmm.co.jp/litevideo/freepv/${sid[0]}/${sid.substring(0, 3)}/${sid}/${sid}_${version}_w.mp4`,
+                rank: rank
+            });
+            links.push({
+                name: 'vp' + version + dmmId.versionSuffix,
+                url: `http://videos.vpdmm.cc/litevideo/freepv/${sid[0]}/${sid.substring(0, 3)}/${sid}/${sid}_${version}_w.mp4`,
+                rank: rank + (RANK.dm - RANK.dmb)
+            });
         }
-
-        is_video_inserted = true
-        addLink('√')
-
-        alertd('successful version: ' + version)
     }
 }
 
-if (!is_video_inserted)
+alertd('Making Prestige links');
 {
-    addLink('×')
+    if (videoMaker == 'プレステージ')
+    {
+        links.push({
+            name: "prestige",
+            url: `https://www.prestige-av.com/sample_movie/TKT${videoId.toUpperCase()}.mp4`,
+            rank: RANK.top
+        });
+    }
 }
+
+alertd('Making HMP links');
+{
+    links.push({
+        name: "hmp",
+        url: `https://sample.hmp.jp/movie01/${videoId.toUpperCase()}.mp4`,
+        rank: RANK.dm
+    });
+}
+
+alertd('Adding links!');
+
+async function tryAccessLink(url)
+{
+    let response = await fetch(url, {
+        method: 'HEAD'
+    });
+    return response.ok;
+}
+
+function addLinkTag(link)
+{
+    let linkTag = document.createElement('a');
+    linkTag.href = link.url;
+    linkTag.innerHTML = link.name;
+    if (link.accessible !== undefined)
+    {
+        linkTag.innerHTML += link.accessible ? '√' : '×';
+    }
+    linkTag.innerHTML += '  ';
+    if (videoIdRow.childElementCount == 2)
+    {
+        videoIdRow.style = "width: 100%;"
+        videoIdRow.insertCell().appendChild(linkTag);
+    }
+    else if (videoIdRow.childElementCount == 3)
+    {
+        videoIdRow.cells[2].appendChild(linkTag);
+    }
+    else
+    {
+        alert('Video ID row has invalid cell number' + videoIdRow.childElementCount.toString());
+    }
+}
+
+function addVideoTag(url)
+{
+    let previewRow = document.getElementById('video_jacket_info').insertRow();
+
+    let videoTag = document.createElement('video');
+    videoTag.src = url;
+    videoTag.controls = true;
+    previewRow.insertCell().appendChild(videoTag);
+
+    // Make use of right side space to put preview thumbs
+    let previewThumbs = document.getElementsByClassName('previewthumbs')[0];
+    if (previewThumbs)
+    {
+        let rightColumnDiv = document.getElementById('rightcolumn');
+        rightColumnDiv.removeChild(previewThumbs);
+        previewRow.insertCell().appendChild(previewThumbs);
+    }
+}
+
+links.sort((a, b) => a.rank - b.rank);
+async function modifyPage()
+{
+    var isVideoInserted = false;
+    for (let link of links)
+    {
+        if (!isVideoInserted)
+        {
+            link.accessible = await tryAccessLink(link.url);
+            if (link.accessible)
+            {
+                addVideoTag(link.url);
+                isVideoInserted = true;
+            }
+        }
+        addLinkTag(link);
+    }
+}
+modifyPage();
+
+alertd('all done');
