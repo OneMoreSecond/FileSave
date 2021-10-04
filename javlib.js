@@ -111,6 +111,8 @@ alertd('Making DMM links');
         ['wkd', '2'],
         ['knmb', 'h_491'],
         ['hzgd', 'h_1100'],
+        ['nacr', 'h_237'],
+        ['skmj', 'h_1324'],
         ['macb', 'h_687']
     ]);
     alertd('DMM config done');
