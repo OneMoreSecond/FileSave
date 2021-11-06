@@ -197,7 +197,7 @@ alertd('Making SOD links');
         links.push({
             name: "sod",
             url: `https://dy43ylo5q3vt8.cloudfront.net/_sample/${sodVideoDate}/${sodVideoId}/${sodVideoId}_sample.mp4`,
-            rank: RANK.dmb
+            rank: RANK.top
         })
     }
 }
