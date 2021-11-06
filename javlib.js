@@ -279,13 +279,14 @@ async function modifyPage()
 }
 modifyPage();
 
-document.body.onkeyup = function (e)
+document.body.addEventListener('keyup', function (e)
 {
-    if (e.keyCode == 32 && videoTag !== null)
+    if (e.key == ' ' && videoTag !== null)
     {
         videoTag.scrollIntoView(true);
         videoTag.play();
+        videoTag.focus();
     }
-}
+})
 
 alertd('all done');
