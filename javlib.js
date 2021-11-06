@@ -300,6 +300,7 @@ document.body.addEventListener('keyup', function (e)
         videoTag.scrollIntoView(true);
         videoTag.play();
         videoTag.focus();
+        e.preventDefault();
     }
 })
 
