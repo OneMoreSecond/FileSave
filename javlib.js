@@ -284,6 +284,7 @@ document.body.onkeyup = function (e)
     if (e.keyCode == 32 && videoTag !== null)
     {
         videoTag.scrollIntoView(true);
+        videoTag.play();
     }
 }
 
