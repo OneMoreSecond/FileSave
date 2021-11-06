@@ -298,9 +298,12 @@ document.body.addEventListener('keyup', function (e)
     if (e.key == ' ' && videoTag !== null)
     {
         videoTag.scrollIntoView(true);
-        videoTag.play();
-        videoTag.focus();
-        e.preventDefault();
+        if (document.activeElement !== videoTag)
+        {
+            videoTag.play();
+            videoTag.focus();
+            e.preventDefault();
+        }
     }
 })
 
