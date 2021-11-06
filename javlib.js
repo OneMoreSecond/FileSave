@@ -257,6 +257,20 @@ function addVideoTag(url)
 
     let videoJacketTag = document.getElementById('video_jacket_info');
     videoJacketTag.parentNode.insertBefore(videoTag, videoJacketTag.nextSibling);
+
+    videoTag.addEventListener('keydown', function (e)
+    {
+        if (e.key == 'ArrowRight')
+        {
+            videoTag.currentTime += 5;
+            e.preventDefault();
+        }
+        else if (e.key == 'ArrowLeft')
+        {
+            videoTag.currentTime -= 5;
+            e.preventDefault();
+        }
+    })
 }
 
 links.sort((a, b) => a.rank - b.rank);
