@@ -293,7 +293,7 @@ async function modifyPage()
 }
 modifyPage();
 
-document.body.addEventListener('keyup', function (e)
+document.body.addEventListener('keydown', function (e)
 {
     if (e.key == ' ' && videoTag !== null)
     {
