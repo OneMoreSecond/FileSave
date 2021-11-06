@@ -37,6 +37,7 @@ alertd('Getting info!');
 let { row: videoMakerRow, text: videoMaker } = getVideoInfo('video_maker');
 let { row: videoLabelRow, text: videoLabel } = getVideoInfo('video_label');
 let { row: videoIdRow, text: videoId } = getVideoInfo('video_id');
+let { row: videoDateRow, text: videoDate } = getVideoInfo('video_date');
 
 alertd('Making links');
 
@@ -53,6 +54,7 @@ const RANK = {
 };
 
 let [videoIdPrefix, videoIdSuffix] = videoId.split('-');
+let lowerVideoIdPrefix = videoIdPrefix.toLowerCase();
 
 alertd('Making DMM links');
 {
@@ -118,15 +120,14 @@ alertd('Making DMM links');
     ]);
     alertd('DMM config done');
 
-    let lowerIdPrefix = videoIdPrefix.toLowerCase();
     let prefixes = new Set(['']);
     if (videoMakerPrefixMap.has(videoMaker))
     {
         prefixes.add(videoMakerPrefixMap.get(videoMaker));
     }
-    if (videoIdPrefixMap.has(lowerIdPrefix))
+    if (videoIdPrefixMap.has(lowerVideoIdPrefix))
     {
-        prefixes.add(videoIdPrefixMap.get(lowerIdPrefix));
+        prefixes.add(videoIdPrefixMap.get(lowerVideoIdPrefix));
     }
     alertd('DMM prefix done');
 
@@ -134,12 +135,12 @@ alertd('Making DMM links');
     for (let prefix of prefixes)
     {
         dmmIds.push({
-            id: prefix + lowerIdPrefix + videoIdSuffix,
+            id: prefix + lowerVideoIdPrefix + videoIdSuffix,
             versionSuffix: prefix,
             rankBias: prefix !== '' ? -2 : 2
         });
         dmmIds.push({
-            id: prefix + lowerIdPrefix + '00' + videoIdSuffix,
+            id: prefix + lowerVideoIdPrefix + '00' + videoIdSuffix,
             versionSuffix: prefix + '0',
             rankBias: prefix !== '' ? -1 : 1
         });
@@ -180,6 +181,24 @@ alertd('Making Prestige links');
             url: `https://www.prestige-av.com/sample_movie/TKT${videoId.toUpperCase()}.mp4`,
             rank: RANK.top
         });
+    }
+}
+
+alertd('Making SOD links');
+{
+    if (videoMaker == 'SOD Create')
+    {
+        let [year, month, day] = videoDate.split('-');
+        let sodVideoDate = year + month;
+        let sodVideoId = lowerVideoIdPrefix + '_' + videoIdSuffix;
+
+        // Originally from https://ec.sod.co.jp/prime/videos/sample.php?id=STARS-485
+        // Install a browser extension to modify the Referer header to https://ec.sod.co.jp/
+        links.push({
+            name: "sod",
+            url: `https://dy43ylo5q3vt8.cloudfront.net/_sample/${sodVideoDate}/${sodVideoId}/${sodVideoId}_sample.mp4`,
+            rank: RANK.dmb
+        })
     }
 }
 
