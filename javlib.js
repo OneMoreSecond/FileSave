@@ -251,7 +251,8 @@ function addVideoTag(url)
     let videoTag = document.createElement('video');
     videoTag.src = url;
     videoTag.controls = true;
-    videoTag.style = "width: 100%;";
+    let maxHeight = window.innerHeight;
+    videoTag.style = `width: 100%; max-height: ${maxHeight}px;`;
 
     let videoJacketTag = document.getElementById('video_jacket_info');
     videoJacketTag.parentNode.insertBefore(videoTag, videoJacketTag.nextSibling);
