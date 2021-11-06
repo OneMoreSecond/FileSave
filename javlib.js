@@ -246,9 +246,10 @@ function addLinkTag(link)
     }
 }
 
+let videoTag = null;
 function addVideoTag(url)
 {
-    let videoTag = document.createElement('video');
+    videoTag = document.createElement('video');
     videoTag.src = url;
     videoTag.controls = true;
     let maxHeight = window.innerHeight;
@@ -277,5 +278,13 @@ async function modifyPage()
     }
 }
 modifyPage();
+
+document.body.onkeyup = function (e)
+{
+    if (e.keyCode == 32 && videoTag !== null)
+    {
+        videoTag.scrollIntoView(true);
+    }
+}
 
 alertd('all done');
