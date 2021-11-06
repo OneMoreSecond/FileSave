@@ -248,21 +248,13 @@ function addLinkTag(link)
 
 function addVideoTag(url)
 {
-    let previewRow = document.getElementById('video_jacket_info').insertRow();
-
     let videoTag = document.createElement('video');
     videoTag.src = url;
     videoTag.controls = true;
-    previewRow.insertCell().appendChild(videoTag);
+    videoTag.style = "width: 100%;";
 
-    // Make use of right side space to put preview thumbs
-    let previewThumbs = document.getElementsByClassName('previewthumbs')[0];
-    if (previewThumbs)
-    {
-        let rightColumnDiv = document.getElementById('rightcolumn');
-        rightColumnDiv.removeChild(previewThumbs);
-        previewRow.insertCell().appendChild(previewThumbs);
-    }
+    let videoJacketTag = document.getElementById('video_jacket_info');
+    videoJacketTag.parentNode.insertBefore(videoTag, videoJacketTag.nextSibling);
 }
 
 links.sort((a, b) => a.rank - b.rank);
