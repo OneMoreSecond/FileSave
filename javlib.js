@@ -112,6 +112,7 @@ alertd('Making DMM links');
         ['sdjs', '1'],
         ['wfr', '2'],
         ['wkd', '2'],
+        ['dkd', '24'],
         ['knmb', 'h_491'],
         ['hzgd', 'h_1100'],
         ['nacr', 'h_237'],
