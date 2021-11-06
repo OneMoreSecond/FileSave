@@ -38,6 +38,7 @@ let { row: videoMakerRow, text: videoMaker } = getVideoInfo('video_maker');
 let { row: videoLabelRow, text: videoLabel } = getVideoInfo('video_label');
 let { row: videoIdRow, text: videoId } = getVideoInfo('video_id');
 let { row: videoDateRow, text: videoDate } = getVideoInfo('video_date');
+let { row: videoCastRow, text: videoCast } = getVideoInfo('video_cast');
 
 alertd('Making links');
 
@@ -268,6 +269,21 @@ function addVideoTag(url)
         else if (e.key == 'ArrowLeft')
         {
             videoTag.currentTime -= 5;
+            e.preventDefault();
+        }
+        else if (e.key == 'ArrowUp')
+        {
+            let castLinks = videoCastRow.getElementsByTagName('a');
+            let castLink = castLinks[0];
+            if (castLinks.length == 1)
+            {
+                window.location = castLink.href;
+            }
+            else
+            {
+                castLink.scrollIntoView(true);
+                castLink.focus();
+            }
             e.preventDefault();
         }
     })
