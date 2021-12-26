@@ -118,6 +118,9 @@ alertd('Making DMM links');
         ['nacr', 'h_237'],
         ['skmj', 'h_1324'],
         ['hmnf', 'h_172'],
+        ['xmom', 'h_086'],
+        ['id', '5529'],
+        ['sprd', '18'],
         ['macb', 'h_687']
     ]);
     alertd('DMM config done');
@@ -142,7 +145,7 @@ alertd('Making DMM links');
             rankBias: prefix !== '' ? -2 : 2
         });
         dmmIds.push({
-            id: prefix + lowerVideoIdPrefix + '00' + videoIdSuffix,
+            id: prefix + lowerVideoIdPrefix + videoIdSuffix.padStart(5, '0'),
             versionSuffix: prefix + '0',
             rankBias: prefix !== '' ? -1 : 1
         });
