@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        tranfer
 // @namespace   javlib
-// @include     http://www.javlibrary.com/cn/?v=*
+// @include     https://www.javlibrary.com/cn/?v=*
 // @version     1
 // @grant       none
 // ==/UserScript==allow pasting
