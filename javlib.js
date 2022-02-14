@@ -160,12 +160,12 @@ alertd('Making DMM links');
             let rank = RANK[version] + dmmId.rankBias;
             links.push({
                 name: version + dmmId.versionSuffix,
-                url: `http://cc3001.dmm.co.jp/litevideo/freepv/${sid[0]}/${sid.substring(0, 3)}/${sid}/${sid}_${version}_w.mp4`,
+                url: `https://cc3001.dmm.co.jp/litevideo/freepv/${sid[0]}/${sid.substring(0, 3)}/${sid}/${sid}_${version}_w.mp4`,
                 rank: rank
             });
             links.push({
                 name: 'vp' + version + dmmId.versionSuffix,
-                url: `http://videos.vpdmm.cc/litevideo/freepv/${sid[0]}/${sid.substring(0, 3)}/${sid}/${sid}_${version}_w.mp4`,
+                url: `https://videos.vpdmm.cc/litevideo/freepv/${sid[0]}/${sid.substring(0, 3)}/${sid}/${sid}_${version}_w.mp4`,
                 rank: rank + (RANK.dm - RANK.dmb)
             });
         }
