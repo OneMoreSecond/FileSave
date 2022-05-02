@@ -96,6 +96,7 @@ alertd('Making DMM links');
         ['msfh', '1'],
         ['sdmf', '1'],
         ['kire', '1'],
+        ['mtall', '1'],
         ['gvh', '13'],
         ['nitr', '49'],
         ['honb', 'h_1133'],
