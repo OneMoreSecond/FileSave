@@ -98,6 +98,8 @@ alertd('Making DMM links');
         ['kire', '1'],
         ['mtall', '1'],
         ['wawa', '1'],
+        ['aege', '1'],
+        ['nhdtb', '1'],
         ['gvh', '13'],
         ['nitr', '49'],
         ['honb', 'h_1133'],
