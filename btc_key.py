@@ -138,6 +138,8 @@ def getWif(privkey: bytes, compressed=False) -> str:
 def WifToPrivateKey(wif: str) -> bytes:
     privkey = b58_decode(wif)[1:-4]
     if len(privkey) == 33:
+        assert privkey[-1] == 1, 'compressed WIF must end with 0x01'
+        print('compressed WIF')
         privkey = privkey[:-1]
     return privkey
 
