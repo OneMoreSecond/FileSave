@@ -119,14 +119,17 @@ def getLegacyAddress(hash160: bytes) -> str:
 def public_key_to_taproot_address(public_key: Point):
     # Convert the public key to a 32-byte X coordinate
     x_only_pubkey = public_key.x.to_bytes(32, "big")
-
-    address = bech32.encode("bc", 1, x_only_pubkey)
+    raise NotImplementedError("Taproot address generation is not implemented yet")
+    #hash160 = ripemd160(sha256(x_only_pubkey))
+    #address = bech32.encode("bc", 1, hash160)
+    #address = bech32.encode("bc", 1, x_only_pubkey)
     return address
 
 
 def getBech32Address(hash160: bytes) -> str:
     address = bech32.encode("bc", 0, hash160)
     return address
+
 
 def getWif(privkey: bytes, compressed=False) -> str:
     wif = b"\x80" + privkey
@@ -168,7 +171,7 @@ if __name__ == "__main__":
     print("Compressed Address: " + getLegacyAddress(compressed_hash160))
     print("Native SegWit Address: " + getBech32Address(compressed_hash160))
 
-    print("Taproot Address (WIP): " + public_key_to_taproot_address(pubkey))
+    #print("Taproot Address (WIP): " + public_key_to_taproot_address(pubkey))
 
     if args.print_wif:
         print("Privkey(32-bytes WIF): " + getWif(privkey))
